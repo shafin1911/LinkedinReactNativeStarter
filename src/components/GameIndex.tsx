@@ -152,11 +152,11 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 24,
-    backgroundColor: 'yellow',
+    backgroundColor: '#456',
     textAlign: 'center',
   },
   StatusPlaying: {
-    backgroundColor: '#ddd',
+    backgroundColor: '#111',
   },
   StatusLost: {
     backgroundColor: 'red',

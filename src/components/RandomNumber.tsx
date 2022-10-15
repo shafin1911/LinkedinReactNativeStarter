@@ -27,7 +27,7 @@ export default RandomNumber;
 const styles = StyleSheet.create({
   random: {
     fontSize: 40,
-    backgroundColor: '#ddd',
+    backgroundColor: '#e50',
     textAlign: 'center',
     margin: 18,
     minWidth: 120,
