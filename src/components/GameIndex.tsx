@@ -19,6 +19,7 @@ const GameIndex: React.FC<
   }>
 > = ({randomNumberCount = 6, gameTime = 10, resetGame}) => {
   const [selectedIds, setSelectedIds] = useState<number[]>([]);
+  const [selectedSum, setSelectedSum] = useState<number>(0);
   const [remainingTime, setRemainingTime] = useState<number>(gameTime);
   const [gameStatus, setGameStatus] = useState<gameStatusType>('Playing');
 
@@ -45,7 +46,7 @@ const GameIndex: React.FC<
         (acc, curr) => acc + shuffledNumbers[curr],
         0,
       );
-
+      setSelectedSum(sumSelected);
       if (sumSelected > target) {
         setGameStatus('Lost');
       }
@@ -93,7 +94,7 @@ const GameIndex: React.FC<
   return (
     <View style={styles.sectionContainer}>
       <Text style={[styles.target, styles[`Status${gameStatus}`]]}>
-        {target}
+        Target: {target}
       </Text>
       <View style={styles.randomContainer}>
         {shuffledNumbers.map((item: number, index: number) => {
@@ -108,8 +109,13 @@ const GameIndex: React.FC<
           );
         })}
       </View>
-      <Text style={styles.target}>{gameStatus}</Text>
-      <Text style={styles.target}>Time Remaining {remainingTime} Seconds</Text>
+      <Text style={[styles.target, styles[`Status${gameStatus}`]]}>
+        Added: {selectedSum}
+      </Text>
+      <Text style={styles.timer}>Time Remaining {remainingTime} Seconds</Text>
+      <Text style={styles.label}>
+        Status: <Text style={styles.label}>{gameStatus}</Text>
+      </Text>
       <Button title="Play Again" onPress={() => resetGame()} />
     </View>
   );
@@ -119,7 +125,7 @@ export default GameIndex;
 
 const styles = StyleSheet.create({
   sectionContainer: {
-    marginTop: 40,
+    marginTop: 0,
     padding: 24,
     backgroundColor: 'orange',
     flex: 1,
@@ -129,12 +135,25 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginHorizontal: 50,
     marginVertical: 30,
+    paddingBottom: 12,
+    paddingTop: 8,
+  },
+  timer: {
+    fontSize: 32,
+    textAlign: 'center',
+    marginHorizontal: 50,
+    marginVertical: 30,
   },
   randomContainer: {
     flex: 1,
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-around',
+  },
+  label: {
+    fontSize: 24,
+    backgroundColor: 'yellow',
+    textAlign: 'center',
   },
   StatusPlaying: {
     backgroundColor: '#ddd',
